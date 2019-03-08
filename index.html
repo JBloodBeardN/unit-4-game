@@ -21,10 +21,29 @@
     <div class="row">
         <div class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
         <div class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:grey">Pokemon<br>Battle</div>
-        <div class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
-        <div class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color: grey"></div>
-        <div class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
-        <div class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:gray"></div>
+        <div id="characterImageHeader" class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
+        <div id="characterDataHeader" class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color: grey">
+            <div class="row">
+                <div id="characterNameLabel" class="col-md-6">Name: </div>
+                <div id="characterName" class="col-md-6"></div>
+            </div>
+            <div class="row">
+                <div id="healthPointsRemainingLabel" class="col-md-6">HP: </div>
+                <div id="healthPointsRemaining"class="col-md-6"></div>
+            </div>
+        </div>
+        <div id="enemyImageHeader" class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
+        <div id="enemyDataHeader" class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:gray">
+            <div class="row">
+                    <div id="enemyNameLabel" class="col-md-6">Name:</div>
+                    <div id="enemyName" class="col-md-6"></div>
+                </div>
+                <div class="row">
+                    <div id="enemyHealthPointsRemainingLabel" class="col-md-6">HP: </div>
+                    <div id="enemyHealthPointsRemaining"class="col-md-6"></div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -37,19 +56,19 @@
                     <div class="col-md-12">Choose a Character:</div>
                 </div>    
                 <div class="row justify-content-between" style="background-color:red">
-                    <div value="pikachu" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Shock: 15" data-toggle="tooltip" style="background-color:yellow; height:100px; margin: 20px auto">
+                    <div data-value="pikachu" value="pikachu" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Shock: 15" data-toggle="tooltip" style="background-color:yellow; height:100px; margin: 20px auto">
                         Pikachu
 
                     </div>
-                    <div value="squirtle" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:blue; height:100px; margin: 20px auto">
+                    <div value="squirtle" data-value="squirtle" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:blue; height:100px; margin: 20px auto">
                         Squirtle
 
                     </div>
-                    <div value="bulbasaur" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:green; height:100px; margin: 20px auto">
+                    <div value="bulbasaur" data-value="bulbasaur" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:green; height:100px; margin: 20px auto">
                         Bulbasaur
 
                     </div>
-                    <div value="charmander" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:orange; height:100px; margin: 20px auto">
+                    <div data-value="charmander" value="charmander" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:orange; height:100px; margin: 20px auto">
                         Charmander
 
                     </div>
@@ -62,19 +81,19 @@
                     <div class="col-md-12">Choose your first enemy:</div>
                 </div>    
                 <div class="row justify-content-between" style="background-color:red">
-                    <div value="pikachuEnemy" class="col-md-3 col-sm-6 enemy" style="background-color:yellow; height:100px; margin: 20px auto">
+                    <div data-value="pikachuEnemy" value="pikachu" class="col-md-3 col-sm-6 enemy" style="background-color:yellow; height:100px; margin: 20px auto">
                         Pikachu
 
                     </div>
-                    <div value="squirtleEnemy" class="col-md-3 col-sm-6 enemy" style="background-color:blue; height:100px; margin: 20px auto">
+                    <div data-value="squirtleEnemy" value="squirtle" class="col-md-3 col-sm-6 enemy" style="background-color:blue; height:100px; margin: 20px auto">
                         Squirtle
 
                     </div>
-                    <div value="bulbasaurEnemy" class="col-md-3 col-sm-6 enemy" style="background-color:green; height:100px; margin: 20px auto">
+                    <div data-value="bulbasaurEnemy" value="bulbasaur" class="col-md-3 col-sm-6 enemy" style="background-color:green; height:100px; margin: 20px auto">
                         Bulbasaur
 
                     </div>
-                    <div value="charmanderEnemy" class="col-md-3 col-sm-6 enemy" style="background-color:orange; height:100px; margin: 20px auto">
+                    <div data-value="charmanderEnemy" value="charmander" class="col-md-3 col-sm-6 enemy" style="background-color:orange; height:100px; margin: 20px auto">
                         Charmander
 
                     </div>
@@ -93,10 +112,10 @@
     var currentEnemy;
     var characters = ["Pikachu", "Bulbasaur", "Charmander", "Squirtle"];
     var characterImages = {
-        Pikachu: "...",
-        Bulbasaur: "...",
-        Charmander: "...",
-        Squirtle: "..."
+        pikachu: "...",
+        bulbasaur: "...",
+        charmander: "...",
+        squirtle: "..."
     }
     var trainerName;
     var attackMultiplier;
@@ -108,7 +127,8 @@
     //create objects (pikachu, squirtle, bulbasaur, charmander)
     //objects have health, array: attacks, object: primary attack(attack power, name, type), object: special attack (attack power, name, type), counter-attack //
     //(controlled for what is greater value- primary or special * multiplier), level, points, object: level ups (levels, level values, power values at level), speed, character types
-    var Pikachu = {
+    var characterObjects = {
+    pikachu: {
         name: "Pikachu",
         type: "electric",
         healthPoints: "100",
@@ -116,8 +136,8 @@
         ["Tackle", 10, "regular"], 
         ["Shock", 20, "electric"]
         ],
-    }
-    var Charmander = {
+    },
+    charmander: {
         name: "Charmander",
         type: "fire",
         healthPoints: "100",
@@ -125,8 +145,8 @@
         ["Tackle", 10, "regular"], 
         ["Ember", 20, "fire"]
         ],
-    }
-    var Bulbasaur = {
+    },
+    bulbasaur: {
         name: "Bulbasaur",
         type: "earth",
         healthPoints: "100",
@@ -134,8 +154,8 @@
         ["Tackle", 10, "regular"], 
         ["Sprout", 20, "earth"]
         ],
-    }
-    var Squirtle = {
+    },
+    squirtle: {
         name: "Squirtle",
         type: "water",
         healthPoints: "100",
@@ -143,6 +163,7 @@
         ["Tackle", 10, "regular"], 
         ["Squirt", 20, "water"]
         ],
+    }
     }
 
     //function for determining multiplier
@@ -176,12 +197,12 @@ $('.character').click(function(){
     chosenCharacter = this.getAttribute("value");
     characters.forEach(function(element){
         if(element.toLowerCase() != chosenCharacter){
-            console.log("click "+element);
-            $(eval("'[value=\""+element.toLowerCase()+"\"]'")).attr("style", "visibility: hidden");
+            $(eval("'[data-value=\""+element.toLowerCase()+"\"]'")).attr("style", "visibility: hidden");
+            // $(eval("'[value=\""+element.toLowerCase()+"\"]'")).attr("style", "visibility: hidden");
         }
     $('#enemySection').attr("style","visibility: visible");
     });
-    $(eval("'[value=\""+chosenCharacter.toLowerCase()+"Enemy\"]'")).attr("style", "visibility: hidden");
+    $(eval("'[data-value=\""+chosenCharacter.toLowerCase()+"Enemy\"]'")).attr("style", "visibility: hidden");
 });
 //    -set chosen character
 //    -update display for chosen character
@@ -198,12 +219,16 @@ $('.character').click(function(){
 $('.enemy').click(function(){
     currentEnemy = this.getAttribute("value");
     characters.forEach(function(element){
+        console.log(currentEnemy+" currentEnemy");
+        console.log(element+ " element"); 
         if(currentEnemy.indexOf(element.toLowerCase())<0){
-            $(eval("'[value=\""+element.toLowerCase()+"Enemy\"]'")).attr("style", "visibility: hidden");
+            $(eval("'[data-value=\""+element.toLowerCase()+"Enemy\"]'")).attr("style", "visibility: hidden");
         }
     });
-    $('#battleButton').html('<button style="margin: 2vh 10vw"id="battleButtonElement" class="btn btn-primary">Battle!!</button>');
+    $('#battleButton').html('<button style="margin: 2vh 10vw"id="battleButtonElement" onclick="goToBattle()" class="btn btn-primary">Battle!!</button>');
 });
+
+
 
 function goToBattle(){
 //change background image
@@ -211,12 +236,22 @@ function goToBattle(){
 //hide the character choice icons
 //display fight icons
 //display fight choice footer
+
+//========================
+//minimum proof of concept
+//push chosenCharacter and currentEnemy names to header
+//push attack and health stats to header
+//add buttons for primary attack and special attack with titles
+
+$('#characterName').text(characterObjects[eval("'"+chosenCharacter+"'")].name);
+$('#healthPointsRemaining').text(characterObjects[eval("'"+chosenCharacter+"'")].healthPoints);
+$('#enemyName').text(characterObjects[eval("'"+currentEnemy+"'")].name);
+$('#enemyHealthPointsRemaining').text(characterObjects[eval("'"+currentEnemy+"'")].healthPoints);
 }
 
 
 //    //fight
 //      onclick event - attacks
-//      -evaluate speed (who attacks first)
 //      at all increment points compare health to zero - break;
 //      -increment enemy health points
 //      -select attack for enemy
