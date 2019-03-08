@@ -105,11 +105,37 @@
         </div>
     <div>
 </div>
+<footer id="battleFooter" style="position:fixed; bottom:0; left:0; background-color:#ffdb4d; width:100%; box-sizing:border-box; border-top:2px solid #b38f00; max-height: 25vh; ">
+    <div class="container">
+        <div class="row">
+            <div id="footerMessage" style="padding: 10vh;" class="col-md-6">
+                "What should your Character do?"
+            </div>
+            <div class="col-md-6">
+                <div class="row align-items-center" style="min-height:20vh;">
+                    <div class="col-md-12" >
+                        <div class="row">
+                            <div id="primaryAttackFooter" class="col-md-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" id="specialAttackFooter"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</footer>
 
     <script>
         //global variables to track stuff and things
     var chosenCharacter;
     var currentEnemy;
+    var defeatedEnemies= [];
     var characters = ["Pikachu", "Bulbasaur", "Charmander", "Squirtle"];
     var characterImages = {
         pikachu: "...",
@@ -120,6 +146,9 @@
     var trainerName;
     var attackMultiplier;
     var counterAttackMultiplier;
+    var attackingFlag=false;
+    var characterHealth;
+    var enemyHealth;
 
     //creating my characters as objects with properties
     //create variable for tracking defeated enemies
@@ -131,34 +160,38 @@
     pikachu: {
         name: "Pikachu",
         type: "electric",
-        healthPoints: "100",
+        healthPoints: 110,
+        damage: 0,
         attacks: [
-        ["Tackle", 10, "regular"], 
-        ["Shock", 20, "electric"]
+        ["Tackle", 20, "regular"], 
+        ["Shock", 15, "electric"]
         ],
     },
     charmander: {
         name: "Charmander",
         type: "fire",
-        healthPoints: "100",
+        healthPoints: 120,
+        damage: 0,
         attacks: [
-        ["Tackle", 10, "regular"], 
-        ["Ember", 20, "fire"]
+        ["Tackle", 20, "regular"], 
+        ["Ember", 15, "fire"]
         ],
     },
     bulbasaur: {
         name: "Bulbasaur",
         type: "earth",
-        healthPoints: "100",
+        healthPoints: 130,
+        damage: 0,
         attacks: [
-        ["Tackle", 10, "regular"], 
+        ["Tackle", 15, "regular"], 
         ["Sprout", 20, "earth"]
         ],
     },
     squirtle: {
         name: "Squirtle",
         type: "water",
-        healthPoints: "100",
+        healthPoints: 125,
+        damage: 0,
         attacks: [
         ["Tackle", 10, "regular"], 
         ["Squirt", 20, "water"]
@@ -185,6 +218,7 @@
             (attackerAttackType === "fire" && defenderType === "water")){
                 return(.5);
             }
+        else{return 1}
     }
 
    //display updates on selection - removes non-selected characters, and injects non-selected characters into choose first opponent section (this section needs a first time round check to present- choose next opponent - your last opponent "a new opponent has enter the... Mortal Kombat)
@@ -219,8 +253,6 @@ $('.character').click(function(){
 $('.enemy').click(function(){
     currentEnemy = this.getAttribute("value");
     characters.forEach(function(element){
-        console.log(currentEnemy+" currentEnemy");
-        console.log(element+ " element"); 
         if(currentEnemy.indexOf(element.toLowerCase())<0){
             $(eval("'[data-value=\""+element.toLowerCase()+"Enemy\"]'")).attr("style", "visibility: hidden");
         }
@@ -236,6 +268,7 @@ function goToBattle(){
 //hide the character choice icons
 //display fight icons
 //display fight choice footer
+    //two sections - col-6 of status updates: prompts for attack, then enemy attack and damage done (setTimeout = 3sec)
 
 //========================
 //minimum proof of concept
@@ -247,16 +280,104 @@ $('#characterName').text(characterObjects[eval("'"+chosenCharacter+"'")].name);
 $('#healthPointsRemaining').text(characterObjects[eval("'"+chosenCharacter+"'")].healthPoints);
 $('#enemyName').text(characterObjects[eval("'"+currentEnemy+"'")].name);
 $('#enemyHealthPointsRemaining').text(characterObjects[eval("'"+currentEnemy+"'")].healthPoints);
+$('#primaryAttackFooter').append('<button id="primaryAttack" onclick="primaryAttack()" class="btn btn-danger">Tackle</button>');
+$('#specialAttackFooter').append('<button id="specialAttack" onclick="specialAttack()" class="btn btn-danger">Special</button>');
+
 }
 
 
 //    //fight
-//      onclick event - attacks
-//      at all increment points compare health to zero - break;
-//      -increment enemy health points
-//      -select attack for enemy
-//      -increment chosen health points (-counter attack)
+function primaryAttack(){
+    if(!attackingFlag){
+    attackingFlag = true;
+    var strength = characterObjects[eval("'"+chosenCharacter+"'")].attacks[0][1];
+    var type = characterObjects[eval("'"+chosenCharacter+"'")].attacks[0][2];
+    var name = characterObjects[eval("'"+chosenCharacter+"'")].attacks[0][0]
+    fight(name, strength, type)
+    } //else do nothing
+}
 
+function specialAttack(){
+    if(!attackingFlag){
+    attackingFlag = true;
+    var strength = characterObjects[eval("'"+chosenCharacter+"'")].attacks[1][1];
+    var type = characterObjects[eval("'"+chosenCharacter+"'")].attacks[1][2];
+    var name = characterObjects[eval("'"+chosenCharacter+"'")].attacks[1][0]
+    fight(name, strength, type)
+    } //else do nothing
+}
+
+function fight(name, strength, type){
+//set a damageDone variable
+//applies damageDone to enemy.damage
+    var damageDone = (strength * multiplierCalculate(type, characterObjects[eval("'"+currentEnemy+"'")].type));
+    characterObjects[eval("'"+currentEnemy+"'")].damage -= damageDone;
+//      -increment enemy health points       
+//this updates the footer message with the action of the character
+    $('#footerMessage').text(characterObjects[eval("'"+chosenCharacter+"'")].name + " attacked with " + name+ " and did "+damageDone+ " damage.");
+    //this sets a variable for health and updates the display for the enemy
+    var enemyHealth = (characterObjects[eval("'"+currentEnemy+"'")].healthPoints + characterObjects[eval("'"+currentEnemy+"'")].damage);
+    $('#enemyHealthPointsRemaining').text(enemyHealth);
+    //      -select attack for enemy
+    //      -increment chosen health points (-counter attack)
+    //I gotta do a timeout thing here
+    
+    // var characterHealth;
+    var interval = setInterval(function(){
+        var timesRun = 0;
+        timesRun += 1;
+
+        if(timesRun === 1){
+            clearInterval(interval);
+            }
+            if(characterObjects[eval("'"+currentEnemy+"'")].attacks[0][1] > (characterObjects[eval("'"+currentEnemy+"'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'"+currentEnemy+"'")].attacks[1][2], characterObjects[eval("'"+chosenCharacter+"'")].type)))
+            {
+                $('#footerMessage').text(characterObjects[eval("'"+currentEnemy+"'")].name + " attacked with " + characterObjects[eval("'"+currentEnemy+"'")].attacks[0][0]+ " and did "+characterObjects[eval("'"+currentEnemy+"'")].attacks[0][1]+ " damage.");
+                characterObjects[eval("'"+chosenCharacter+"'")].damage -= characterObjects[eval("'"+currentEnemy+"'")].attacks[0][1];
+            } else {
+                $('#footerMessage').text(characterObjects[eval("'"+currentEnemy+"'")].name + " attacked with " + characterObjects[eval("'"+currentEnemy+"'")].attacks[1][0]+ " and did "+(characterObjects[eval("'"+currentEnemy+"'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'"+currentEnemy+"'")].attacks[1][2]))+ " damage.");
+                characterObjects[eval("'"+chosenCharacter+"'")].damage -= characterObjects[eval("'"+currentEnemy+"'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'"+currentEnemy+"'")].attacks[1][2], characterObjects[eval("'"+chosenCharacter+"'")].type);
+            }
+            
+            characterHealth = (characterObjects[eval("'"+chosenCharacter+"'")].healthPoints + characterObjects[eval("'"+chosenCharacter+"'")].damage);
+            $('#healthPointsRemaining').text(characterHealth);
+        }, 2000); 
+    //time interval for update back to ready state
+
+    var interval = setInterval(function(){
+        var timesRun = 0;
+        timesRun += 1;
+        if(timesRun === 1){
+            clearInterval(interval);
+           
+        }, 2000); 
+
+        var timesRun = 0;
+var interval = setInterval(function(){
+    timesRun += 1;
+    if(timesRun === 60){
+        clearInterval(interval);
+    }
+    //do whatever here..
+}, 2000); 
+   
+    
+    //at all increment points compare health to zero - break;
+    if(characterHealth <= 0){
+        alert("Your Pokemon fainted...");
+    }
+    else if(enemyHealth <= 0 && defeatedEnemies.length <3){
+        defeatedEnemies.push(currentEnemy);
+        alert("Round Two");
+    } else if(enemyHealth <= 0 && defeatedEnemies.length == 3){
+        alert("You are a PokeMon Master!");
+    } else {
+        attackingFlag = false;
+    }
+
+};
+
+   
 
 
 //    //end of fight
