@@ -1,401 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css"href="assets/css/style.css">
-    
-    <title>Document</title>
-</head>
-<body>
-<!-- this is the original header that hides the game mode header -->
-<header id="switchHeader" style="visibility:hidden; z-index: 1; width:100%; height: 10vh; padding-top:1vh; font-size:42px; box-sizing: border-box; text-align:center; position:fixed; top:0; left:0; border-bottom:2px solid gold; background-color: linen"> PokeMon Battle!!</header>
+    <script src="game.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-<!-- this is the game mode header that has all of the actual variables and stuff that need to be updated -->
-<div id="gameHUD" class="container" style="background-color: linen; max-width:100%; margin:0; padding:0; box-sizing: border-box">
-    <div class="row">
-        <div class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
-        <div class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:grey">Pokemon<br>Battle</div>
-        <div id="characterImageHeader" class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
-        <div id="characterDataHeader" class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color: grey">
-            <div class="row">
-                <div id="characterNameLabel" class="col-md-6">Name: </div>
-                <div id="characterName" class="col-md-6"></div>
+    <title>Document</title>
+
+</head>
+
+<body>
+    <!-- this is the original header that hides the game mode header -->
+    <header id="switchHeader"
+        style="visibility:hidden; z-index: 1; width:100%; height: 10vh; padding-top:1vh; font-size:42px; box-sizing: border-box; text-align:center; position:fixed; top:0; left:0; border-bottom:2px solid gold; background-color: linen">
+        PokeMon Battle!!</header>
+
+    <!-- this is the game mode header that has all of the actual variables and stuff that need to be updated -->
+    <div id="gameHUD" class="container"
+        style="background-color: linen; overflow:hidden; max-width:100%; margin:0; padding:0; box-sizing: border-box">
+        <div class="row" style="overflow:hidden">
+            <div class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
+            <div class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:grey">
+                Pokemon<br>Battle</div>
+            <div id="characterImageHeader" class="col-md-1"
+                style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
+            <div id="characterDataHeader" class="col-md-3"
+                style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color: grey">
+                <div class="row">
+                    <div id="characterNameLabel" class="col-md-6">Name: </div>
+                    <div id="characterName" class="col-md-6"></div>
+                </div>
+                <div class="row">
+                    <div id="healthPointsRemainingLabel" class="col-md-6">HP: </div>
+                    <div id="healthPointsRemaining" class="col-md-6"></div>
+                </div>
             </div>
-            <div class="row">
-                <div id="healthPointsRemainingLabel" class="col-md-6">HP: </div>
-                <div id="healthPointsRemaining"class="col-md-6"></div>
-            </div>
-        </div>
-        <div id="enemyImageHeader" class="col-md-1" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
-        <div id="enemyDataHeader" class="col-md-3" style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:gray">
-            <div class="row">
+            <div id="enemyImageHeader" class="col-md-1"
+                style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:salmon"></div>
+            <div id="enemyDataHeader" class="col-md-3"
+                style="height:8vh; margin-bottom:1vh; margin-top:1vh; background-color:gray">
+                <div class="row">
                     <div id="enemyNameLabel" class="col-md-6">Name:</div>
                     <div id="enemyName" class="col-md-6"></div>
                 </div>
                 <div class="row">
                     <div id="enemyHealthPointsRemainingLabel" class="col-md-6">HP: </div>
-                    <div id="enemyHealthPointsRemaining"class="col-md-6"></div>
+                    <div id="enemyHealthPointsRemaining" class="col-md-6"></div>
                 </div>
             </div>
         </div>
 
     </div>
 
-</div>  
-<div style="min-height:90vh; background-image: url('images/pokemon-initial-background108.jpg'); background-repeat: no-repeat; background-size:cover">     
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6" style="background-color:blue">
-                <div class="row justify-content-between" style="background-color:lightgray">
-                    <div class="col-md-12">Choose a Character:</div>
-                </div>    
-                <div class="row justify-content-between" style="background-color:red">
-                    <div data-value="pikachu" value="pikachu" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Shock: 15" data-toggle="tooltip" style="background-color:yellow; height:100px; margin: 20px auto">
-                        Pikachu
-
+    </div>
+    <div
+        style="min-height:90vh; background-image: url('images/pokemon-initial-background108.jpg'); background-repeat: no-repeat; background-size:cover">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="background-color:blue">
+                    <div class="row justify-content-between" style="background-color:lightgray">
+                        <div class="col-md-12">Choose a Character:</div>
                     </div>
-                    <div value="squirtle" data-value="squirtle" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:blue; height:100px; margin: 20px auto">
-                        Squirtle
+                    <div class="row justify-content-between" style="background-color:red">
+                        <div data-value="pikachu" value="pikachu" class="col-md-3 col-sm-6 character"
+                            title="Tackle: 5 &#013; Shock: 15" data-toggle="tooltip"
+                            style="background-color:yellow; height:100px; margin: 20px auto">
+                            Pikachu
 
-                    </div>
-                    <div value="bulbasaur" data-value="bulbasaur" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:green; height:100px; margin: 20px auto">
-                        Bulbasaur
-
-                    </div>
-                    <div data-value="charmander" value="charmander" class="col-md-3 col-sm-6 character" title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip" style="background-color:orange; height:100px; margin: 20px auto">
-                        Charmander
-
-                    </div>
-                </div>    
-            </div>
-        </div>
-        <div id="enemySection" class="row" style="visibility: hidden; margin-bottom:16vh">
-            <div class="col-md-6" style="background-color:blue">
-                <div class="row justify-content-between" style="background-color:lightgray">
-                    <div class="col-md-12">Choose your first enemy:</div>
-                </div>    
-                <div class="row justify-content-between" style="background-color:red">
-                    <div data-value="pikachuEnemy" value="pikachu" class="col-md-3 col-sm-6 enemy" style="background-color:yellow; height:100px; margin: 20px auto">
-                        Pikachu
-
-                    </div>
-                    <div data-value="squirtleEnemy" value="squirtle" class="col-md-3 col-sm-6 enemy" style="background-color:blue; height:100px; margin: 20px auto">
-                        Squirtle
-
-                    </div>
-                    <div data-value="bulbasaurEnemy" value="bulbasaur" class="col-md-3 col-sm-6 enemy" style="background-color:green; height:100px; margin: 20px auto">
-                        Bulbasaur
-
-                    </div>
-                    <div data-value="charmanderEnemy" value="charmander" class="col-md-3 col-sm-6 enemy" style="background-color:orange; height:100px; margin: 20px auto">
-                        Charmander
-
-                    </div>
-                </div>    
-            </div>
-        </div>
-        <div class="row">
-            <div id="battleButton" class="col-md-12"></div>
-        </div>
-    <div>
-</div>
-<footer id="battleFooter" style="position:fixed; bottom:0; left:0; background-color:#ffdb4d; width:100%; box-sizing:border-box; border-top:2px solid #b38f00; max-height: 25vh; ">
-    <div class="container">
-        <div class="row">
-            <div id="footerMessage" style="padding: 10vh;" class="col-md-6">
-                "What should your Character do?"
-            </div>
-            <div class="col-md-6">
-                <div class="row align-items-center" style="min-height:20vh;">
-                    <div class="col-md-12" >
-                        <div class="row">
-                            <div id="primaryAttackFooter" class="col-md-6"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6" id="specialAttackFooter"></div>
+                        <div value="squirtle" data-value="squirtle" class="col-md-3 col-sm-6 character"
+                            title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip"
+                            style="background-color:blue; height:100px; margin: 20px auto">
+                            Squirtle
+
+                        </div>
+                        <div value="bulbasaur" data-value="bulbasaur" class="col-md-3 col-sm-6 character"
+                            title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip"
+                            style="background-color:green; height:100px; margin: 20px auto">
+                            Bulbasaur
+
+                        </div>
+                        <div data-value="charmander" value="charmander" class="col-md-3 col-sm-6 character"
+                            title="Tackle: 5 &#013; Squirt 20" data-toggle="tooltip"
+                            style="background-color:orange; height:100px; margin: 20px auto">
+                            Charmander
+
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="enemySection" class="row" style="visibility: hidden; margin-bottom:16vh">
+                <div class="col-md-6" style="background-color:blue">
+                    <div class="row justify-content-between" style="background-color:lightgray">
+                        <div class="col-md-12">Choose your first enemy:</div>
+                    </div>
+                    <div class="row justify-content-between" style="background-color:red">
+                        <div id="PikachuEnemy" data-value="pikachuEnemy" value="pikachu" class="col-md-3 col-sm-6 enemy">
+                            Pikachu
 
-        </div>
+                        </div>
+                        <div id="squirtleEnemy" data-value="squirtleEnemy" value="squirtle" class="col-md-3 col-sm-6 enemy">
+                            Squirtle
 
+                        </div>
+                        <div id="bulbasaurEnemy" data-value="bulbasaurEnemy" value="bulbasaur" class="col-md-3 col-sm-6 enemy">
+                            Bulbasaur
 
-    </div>
+                        </div>
+                        <div id="charmanderEnemy" data-value="charmanderEnemy" value="charmander" class="col-md-3 col-sm-6 enemy">
+                            Charmander
 
-</footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="battleButton" class="col-md-12"></div>
+            </div>
+            <div>
+            </div>
+            <footer id="battleFooter"
+                style="position:fixed; bottom:0; left:0; background-color:#ffdb4d; margin: 0; width:100%; box-sizing:border-box; border-top:2px solid #b38f00; max-height: 25vh; ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div id="footerMessage" style="padding: 10vh 0;" class="col-md-6">
+                                "What should your Character do?"
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row align-items-center" style="min-height:20vh;">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div id="primaryAttackFooter" class="col-sm-6"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6" id="specialAttackFooter"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-    <script>
-        //global variables to track stuff and things
-    var chosenCharacter;
-    var currentEnemy;
-    var defeatedEnemies= [];
-    var characters = ["Pikachu", "Bulbasaur", "Charmander", "Squirtle"];
-    var characterImages = {
-        pikachu: "...",
-        bulbasaur: "...",
-        charmander: "...",
-        squirtle: "..."
-    }
-    var trainerName;
-    var attackMultiplier;
-    var counterAttackMultiplier;
-    var attackingFlag=false;
-    var characterHealth;
-    var enemyHealth;
-
-    //creating my characters as objects with properties
-    //create variable for tracking defeated enemies
-    //create multiplier for attack/character types
-    //create objects (pikachu, squirtle, bulbasaur, charmander)
-    //objects have health, array: attacks, object: primary attack(attack power, name, type), object: special attack (attack power, name, type), counter-attack //
-    //(controlled for what is greater value- primary or special * multiplier), level, points, object: level ups (levels, level values, power values at level), speed, character types
-    var characterObjects = {
-    pikachu: {
-        name: "Pikachu",
-        type: "electric",
-        healthPoints: 110,
-        damage: 0,
-        attacks: [
-        ["Tackle", 20, "regular"], 
-        ["Shock", 15, "electric"]
-        ],
-    },
-    charmander: {
-        name: "Charmander",
-        type: "fire",
-        healthPoints: 120,
-        damage: 0,
-        attacks: [
-        ["Tackle", 20, "regular"], 
-        ["Ember", 15, "fire"]
-        ],
-    },
-    bulbasaur: {
-        name: "Bulbasaur",
-        type: "earth",
-        healthPoints: 130,
-        damage: 0,
-        attacks: [
-        ["Tackle", 15, "regular"], 
-        ["Sprout", 20, "earth"]
-        ],
-    },
-    squirtle: {
-        name: "Squirtle",
-        type: "water",
-        healthPoints: 125,
-        damage: 0,
-        attacks: [
-        ["Tackle", 10, "regular"], 
-        ["Squirt", 20, "water"]
-        ],
-    }
-    }
-
-    //function for determining multiplier
-    //positive conditions: water 2 fire, eletric to water, fire to earth
-    //less positive conditions: earth 2 water
-    //negative conditions: electric to earth, fire 2 water
-    //called the function from console to unit test it returns a integer I expect
-    function multiplierCalculate(attackerAttackType, defenderType){
-        if(
-            (attackerAttackType === "water" && defenderType === "fire") ||
-            (attackerAttackType === "electric" && defenderType === "water") ||
-            (attackerAttackType === "fire" && defenderType === "earth")){
-                return(2);
-        } else if((attackerAttackType === "earth" && defenderType === "water")){
-                return(1.5);
-        }
-        else if(
-            (attackerAttackType === "electric" && defenderType === "fire")||
-            (attackerAttackType === "fire" && defenderType === "water")){
-                return(.5);
-            }
-        else{return 1}
-    }
-
-   //display updates on selection - removes non-selected characters, and injects non-selected characters into choose first opponent section (this section needs a first time round check to present- choose next opponent - your last opponent "a new opponent has enter the... Mortal Kombat)
-   //display updates on selection
-
-//    //selection
-//    on hover event- tool tips for skills etc
-//    on click event- 
-$('.character').click(function(){
-    chosenCharacter = this.getAttribute("value");
-    characters.forEach(function(element){
-        if(element.toLowerCase() != chosenCharacter){
-            $(eval("'[data-value=\""+element.toLowerCase()+"\"]'")).attr("style", "visibility: hidden");
-            // $(eval("'[value=\""+element.toLowerCase()+"\"]'")).attr("style", "visibility: hidden");
-        }
-    $('#enemySection').attr("style","visibility: visible");
-    });
-    $(eval("'[data-value=\""+chosenCharacter.toLowerCase()+"Enemy\"]'")).attr("style", "visibility: hidden");
-});
-//    -set chosen character
-//    -update display for chosen character
-//    -update display to remove choice section
-//    -update display for enemy selection
+                    </div>
 
 
-//    //enemy selection
-//      on hover event- tool tips for skills etc
-//      on click event- 
-//      -set first enemy
-//      -update display for first enemy
+                </div>
 
-$('.enemy').click(function(){
-    currentEnemy = this.getAttribute("value");
-    characters.forEach(function(element){
-        if(currentEnemy.indexOf(element.toLowerCase())<0){
-            $(eval("'[data-value=\""+element.toLowerCase()+"Enemy\"]'")).attr("style", "visibility: hidden");
-        }
-    });
-    $('#battleButton').html('<button style="margin: 2vh 10vw"id="battleButtonElement" onclick="goToBattle()" class="btn btn-primary">Battle!!</button>');
-});
+            </footer>
+<script>
+//                 //global variables to track stuff and things
+//                 var chosenCharacter;
+//                 var currentEnemy;
+//                 var defeatedEnemies = [];
+//                 var characters = ["Pikachu", "Bulbasaur", "Charmander", "Squirtle"];
+//                 var characterImages = {
+//                     pikachu: "...",
+//                     bulbasaur: "...",
+//                     charmander: "...",
+//                     squirtle: "..."
+//                 }
+//                 var trainerName;
+//                 var attackMultiplier;
+//                 var counterAttackMultiplier;
+//                 var attackingFlag = false;
+//                 var characterHealth;
+//                 var enemyHealth;
+
+//                 //creating my characters as objects with properties
+//                 //create variable for tracking defeated enemies
+//                 //create multiplier for attack/character types
+//                 //create objects (pikachu, squirtle, bulbasaur, charmander)
+//                 //objects have health, array: attacks, object: primary attack(attack power, name, type), object: special attack (attack power, name, type), counter-attack //
+//                 //(controlled for what is greater value- primary or special * multiplier), level, points, object: level ups (levels, level values, power values at level), speed, character types
+//                 var characterObjects = {
+//                     pikachu: {
+//                         name: "Pikachu",
+//                         type: "electric",
+//                         healthPoints: 110,
+//                         damage: 0,
+//                         attacks: [
+//                             ["Tackle", 20, "regular"],
+//                             ["Shock", 15, "electric"]
+//                         ],
+//                     },
+//                     charmander: {
+//                         name: "Charmander",
+//                         type: "fire",
+//                         healthPoints: 120,
+//                         damage: 0,
+//                         attacks: [
+//                             ["Tackle", 20, "regular"],
+//                             ["Ember", 15, "fire"]
+//                         ],
+//                     },
+//                     bulbasaur: {
+//                         name: "Bulbasaur",
+//                         type: "earth",
+//                         healthPoints: 130,
+//                         damage: 0,
+//                         attacks: [
+//                             ["Tackle", 15, "regular"],
+//                             ["Sprout", 20, "earth"]
+//                         ],
+//                     },
+//                     squirtle: {
+//                         name: "Squirtle",
+//                         type: "water",
+//                         healthPoints: 125,
+//                         damage: 0,
+//                         attacks: [
+//                             ["Tackle", 10, "regular"],
+//                             ["Squirt", 20, "water"]
+//                         ],
+//                     }
+//                 }
+
+//                 //function for determining multiplier
+//                 //positive conditions: water 2 fire, eletric to water, fire to earth
+//                 //less positive conditions: earth 2 water
+//                 //negative conditions: electric to earth, fire 2 water
+//                 //called the function from console to unit test it returns a integer I expect
+//                 function multiplierCalculate(attackerAttackType, defenderType) {
+//                     if (
+//                         (attackerAttackType === "water" && defenderType === "fire") ||
+//                         (attackerAttackType === "electric" && defenderType === "water") ||
+//                         (attackerAttackType === "fire" && defenderType === "earth")) {
+//                         return (2);
+//                     } else if ((attackerAttackType === "earth" && defenderType === "water")) {
+//                         return (1.5);
+//                     }
+//                     else if (
+//                         (attackerAttackType === "electric" && defenderType === "fire") ||
+//                         (attackerAttackType === "fire" && defenderType === "water")) {
+//                         return (.5);
+//                     }
+//                     else { return 1 }
+//                 }
+
+//                 //display updates on selection - removes non-selected characters, and injects non-selected characters into choose first opponent section (this section needs a first time round check to present- choose next opponent - your last opponent "a new opponent has enter the... Mortal Kombat)
+//                 //display updates on selection
+
+//                 //    //selection
+//                 //    on hover event- tool tips for skills etc
+//                 //    on click event- 
+//                 $('.character').click(function () {
+//                     chosenCharacter = this.getAttribute("value");
+//                     characters.forEach(function (element) {
+//                         if (element.toLowerCase() != chosenCharacter) {
+//                             $(eval("'[data-value=\"" + element.toLowerCase() + "\"]'")).attr("style", "visibility: hidden");
+//                             // $(eval("'[value=\""+element.toLowerCase()+"\"]'")).attr("style", "visibility: hidden");
+//                         }
+//                         $('#enemySection').attr("style", "visibility: visible");
+//                     });
+//                     $(eval("'[data-value=\"" + chosenCharacter.toLowerCase() + "Enemy\"]'")).attr("style", "visibility: hidden");
+//                 });
+//                 //    -set chosen character
+//                 //    -update display for chosen character
+//                 //    -update display to remove choice section
+//                 //    -update display for enemy selection
+
+
+//                 //    //enemy selection
+//                 //      on hover event- tool tips for skills etc
+//                 //      on click event- 
+//                 //      -set first enemy
+//                 //      -update display for first enemy
+
+//                 $('.enemy').click(function () {
+//                     currentEnemy = this.getAttribute("value");
+//                     characters.forEach(function (element) {
+//                         if (currentEnemy.indexOf(element.toLowerCase()) < 0) {
+//                             $(eval("'[data-value=\"" + element.toLowerCase() + "Enemy\"]'")).attr("style", "visibility: hidden");
+//                         }
+//                     });
+//                     $('#battleButton').html('<button style="margin: 2vh 10vw"id="battleButtonElement" onclick="goToBattle()" class="btn btn-primary">Battle!!</button>');
+//                 });
 
 
 
-function goToBattle(){
-//change background image
-//      -update display of character to include attacks, health, etc
-//hide the character choice icons
-//display fight icons
-//display fight choice footer
-    //two sections - col-6 of status updates: prompts for attack, then enemy attack and damage done (setTimeout = 3sec)
+//                 function goToBattle() {
+//                     //change background image
+//                     //      -update display of character to include attacks, health, etc
+//                     //hide the character choice icons
+//                     //display fight icons
 
-//========================
-//minimum proof of concept
-//push chosenCharacter and currentEnemy names to header
-//push attack and health stats to header
-//add buttons for primary attack and special attack with titles
+//                     //two sections - col-6 of status updates: prompts for attack, then enemy attack and damage done (setTimeout = 3sec)
 
-$('#characterName').text(characterObjects[eval("'"+chosenCharacter+"'")].name);
-$('#healthPointsRemaining').text(characterObjects[eval("'"+chosenCharacter+"'")].healthPoints);
-$('#enemyName').text(characterObjects[eval("'"+currentEnemy+"'")].name);
-$('#enemyHealthPointsRemaining').text(characterObjects[eval("'"+currentEnemy+"'")].healthPoints);
-$('#primaryAttackFooter').append('<button id="primaryAttack" onclick="primaryAttack()" class="btn btn-danger">Tackle</button>');
-$('#specialAttackFooter').append('<button id="specialAttack" onclick="specialAttack()" class="btn btn-danger">Special</button>');
+//                     //========================
+//                     //minimum proof of concept
+//                     //push chosenCharacter and currentEnemy names to header
+//                     //push attack and health stats to header
+//                     //add buttons for primary attack and special attack with titles
+//                     //display fight choice footer
+//                     $('#battleButtonElement').attr('style="visibility:hidden');
+//                     $('#characterName').text(characterObjects[eval("'" + chosenCharacter + "'")].name);
+//                     $('#healthPointsRemaining').text(characterObjects[eval("'" + chosenCharacter + "'")].healthPoints);
+//                     $('#enemyName').text(characterObjects[eval("'" + currentEnemy + "'")].name);
+//                     $('#enemyHealthPointsRemaining').text(characterObjects[eval("'" + currentEnemy + "'")].healthPoints);
+//                     $('#primaryAttackFooter').append('<button id="primaryAttack" onclick="primaryAttack()" class="btn btn-danger">Tackle</button>');
+//                     $('#specialAttackFooter').append('<button id="specialAttack" onclick="specialAttack()" class="btn btn-danger">Special</button>');
 
-}
+//                 };
 
 
-//    //fight
-function primaryAttack(){
-    if(!attackingFlag){
-    attackingFlag = true;
-    var strength = characterObjects[eval("'"+chosenCharacter+"'")].attacks[0][1];
-    var type = characterObjects[eval("'"+chosenCharacter+"'")].attacks[0][2];
-    var name = characterObjects[eval("'"+chosenCharacter+"'")].attacks[0][0]
-    fight(name, strength, type)
-    } //else do nothing
-}
+//                 //    //fight
+//                 function primaryAttack() {
+//                     if (!attackingFlag) {
+//                         attackingFlag = true;
+//                         var strength = characterObjects[eval("'" + chosenCharacter + "'")].attacks[0][1];
+//                         var type = characterObjects[eval("'" + chosenCharacter + "'")].attacks[0][2];
+//                         var name = characterObjects[eval("'" + chosenCharacter + "'")].attacks[0][0]
+//                         fight(name, strength, type)
+//                     } //else do nothing
+//                 };
 
-function specialAttack(){
-    if(!attackingFlag){
-    attackingFlag = true;
-    var strength = characterObjects[eval("'"+chosenCharacter+"'")].attacks[1][1];
-    var type = characterObjects[eval("'"+chosenCharacter+"'")].attacks[1][2];
-    var name = characterObjects[eval("'"+chosenCharacter+"'")].attacks[1][0]
-    fight(name, strength, type)
-    } //else do nothing
-}
+//                 function specialAttack() {
+//                     if (!attackingFlag) {
+//                         attackingFlag = true;
+//                         var strength = characterObjects[eval("'" + chosenCharacter + "'")].attacks[1][1];
+//                         var type = characterObjects[eval("'" + chosenCharacter + "'")].attacks[1][2];
+//                         var name = characterObjects[eval("'" + chosenCharacter + "'")].attacks[1][0]
+//                         fight(name, strength, type)
+//                     } //else do nothing
+//                 };
 
-function fight(name, strength, type){
-//set a damageDone variable
-//applies damageDone to enemy.damage
-    var damageDone = (strength * multiplierCalculate(type, characterObjects[eval("'"+currentEnemy+"'")].type));
-    characterObjects[eval("'"+currentEnemy+"'")].damage -= damageDone;
-//      -increment enemy health points       
-//this updates the footer message with the action of the character
-    $('#footerMessage').text(characterObjects[eval("'"+chosenCharacter+"'")].name + " attacked with " + name+ " and did "+damageDone+ " damage.");
-    //this sets a variable for health and updates the display for the enemy
-    var enemyHealth = (characterObjects[eval("'"+currentEnemy+"'")].healthPoints + characterObjects[eval("'"+currentEnemy+"'")].damage);
-    $('#enemyHealthPointsRemaining').text(enemyHealth);
-    //      -select attack for enemy
-    //      -increment chosen health points (-counter attack)
-    //I gotta do a timeout thing here
-    
-    // var characterHealth;
-    var interval = setInterval(function(){
-        var timesRun = 0;
-        timesRun += 1;
+//                 function fight(name, strength, type) {
+//                     //set a damageDone variable
+//                     //applies damageDone to enemy.damage
+//                     var damageDone = (strength * multiplierCalculate(type, characterObjects[eval("'" + currentEnemy + "'")].type));
+//                     characterObjects[eval("'" + currentEnemy + "'")].damage -= damageDone;
+//                     //      -increment enemy health points       
+//                     //this updates the footer message with the action of the character
+//                     $('#footerMessage').text(characterObjects[eval("'" + chosenCharacter + "'")].name + " attacked with " + name + " and did " + damageDone + " damage.");
+//                     //this sets a variable for health and updates the display for the enemy
+//                     var enemyHealth = (characterObjects[eval("'" + currentEnemy + "'")].healthPoints + characterObjects[eval("'" + currentEnemy + "'")].damage);
+//                     $('#enemyHealthPointsRemaining').text(enemyHealth);
+//                     //      -select attack for enemy
+//                     //      -increment chosen health points (-counter attack)
+//                     //I gotta do a timeout thing here
 
-        if(timesRun === 1){
-            clearInterval(interval);
-            }
-            if(characterObjects[eval("'"+currentEnemy+"'")].attacks[0][1] > (characterObjects[eval("'"+currentEnemy+"'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'"+currentEnemy+"'")].attacks[1][2], characterObjects[eval("'"+chosenCharacter+"'")].type)))
-            {
-                $('#footerMessage').text(characterObjects[eval("'"+currentEnemy+"'")].name + " attacked with " + characterObjects[eval("'"+currentEnemy+"'")].attacks[0][0]+ " and did "+characterObjects[eval("'"+currentEnemy+"'")].attacks[0][1]+ " damage.");
-                characterObjects[eval("'"+chosenCharacter+"'")].damage -= characterObjects[eval("'"+currentEnemy+"'")].attacks[0][1];
-            } else {
-                $('#footerMessage').text(characterObjects[eval("'"+currentEnemy+"'")].name + " attacked with " + characterObjects[eval("'"+currentEnemy+"'")].attacks[1][0]+ " and did "+(characterObjects[eval("'"+currentEnemy+"'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'"+currentEnemy+"'")].attacks[1][2]))+ " damage.");
-                characterObjects[eval("'"+chosenCharacter+"'")].damage -= characterObjects[eval("'"+currentEnemy+"'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'"+currentEnemy+"'")].attacks[1][2], characterObjects[eval("'"+chosenCharacter+"'")].type);
-            }
+//                     // var characterHealth;
+//                     var timesRun = 0;
+//                     var interval = setInterval(function () {
+//                         if (timesRun >= 1) {
+//                             clearInterval(interval);
+//                             endStateCheck();
+//                         }
+//                         else if (characterObjects[eval("'" + currentEnemy + "'")].attacks[0][1] > (characterObjects[eval("'" + currentEnemy + "'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'" + currentEnemy + "'")].attacks[1][2], characterObjects[eval("'" + chosenCharacter + "'")].type))) {
+//                             $('#footerMessage').text(characterObjects[eval("'" + currentEnemy + "'")].name + " attacked with " + characterObjects[eval("'" + currentEnemy + "'")].attacks[0][0] + " and did " + characterObjects[eval("'" + currentEnemy + "'")].attacks[0][1] + " damage.");
+//                             characterObjects[eval("'" + chosenCharacter + "'")].damage -= characterObjects[eval("'" + currentEnemy + "'")].attacks[0][1];
+//                         } else {
+//                             $('#footerMessage').text(characterObjects[eval("'" + currentEnemy + "'")].name + " attacked with " + characterObjects[eval("'" + currentEnemy + "'")].attacks[1][0] + " and did " + (characterObjects[eval("'" + currentEnemy + "'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'" + currentEnemy + "'")].attacks[1][2])) + " damage.");
+//                             characterObjects[eval("'" + chosenCharacter + "'")].damage -= characterObjects[eval("'" + currentEnemy + "'")].attacks[1][1] * multiplierCalculate(characterObjects[eval("'" + currentEnemy + "'")].attacks[1][2], characterObjects[eval("'" + chosenCharacter + "'")].type);
+//                         }
+
+//                         characterHealth = (characterObjects[eval("'" + chosenCharacter + "'")].healthPoints + characterObjects[eval("'" + chosenCharacter + "'")].damage);
+//                         $('#healthPointsRemaining').text(characterHealth);
+//                         timesRun++;
+//                     }, 2000);
+//                     //time interval for update back to ready state
+//                     //at all increment points compare health to zero - break;
+//                     var endCheckInterval = 0;
+//                     function endStateCheck() {
+//                         var intervalEndCheck = setInterval(function () {
+
+
+//                             if (endCheckInterval === 1) {
+//                                 clearInterval(intervalEndCheck);
+//                             } else {
+//                                 if (characterHealth <= 0) {
+//                                     alert("Your Pokemon fainted... GameOver");
+//                                     $('#primaryAttack').attr('style="visibility:hidden"');
+//                                     $('#specialAttack').attr('style="visibility:hidden"');
+//                                 }
+//                                 else if (enemyHealth <= 0 && defeatedEnemies.length < 3) {
+//                                     defeatedEnemies.push(currentEnemy);
+//                                     $('#primaryAttack').attr('style="visibility:hidden"');
+//                                     $('#specialAttack').attr('style="visibility:hidden"');
+//                                     alert("Round Two");
+//                                     nextEnemy();
+
+                                    
+//                                     //turn on enemy selection
+
+//                                 } else if (enemyHealth <= 0 && defeatedEnemies.length == 3) {
+//                                     alert("You are a PokeMon Master!");
+//                                 } else {
+//                                     attackingFlag = false;
+//                                     $('#footerMessage').text("What should your Character do?");
+//                                 }
+//                                 endCheckInterval++;
+//                             };
+
+//                         }, 2000);
+//                     };
+
+
+
+
+
+//                 };
+
+//                 function nextEnemy(){
+//                     //hide current character card
+//                     $(eval("'[data-value=\"" + currentEnemy.toLowerCase() + "Enemy\"]'")).attr("style", "visibility: hidden");
+//                     //show non-defeated characters
+//                     //compare defeated array and characters array
+
+
+//                     characters.forEach(function (element) {
+//                         if ((currentEnemy.indexOf(element.toLowerCase()) < 0)) {
+//                             $(eval("'[data-value=\"" + element.toLowerCase() + "Enemy\"]'")).attr("style", "visibility: visible");
+//                         }
+//                     });
+//                 }
+
+
+
+
+
+// //    //end of fight
+// //      -add enemy to defeated enemies
+// //      -if last enemy check - if last enemy exit to game success message(end of game)
+// //      -round success message
+// //      -update points
+// //      -evaluate character level
+// //      -new powers message
+// //      -update display to choices screen (with choose enemies open- defeated enemies)
+// //      same on-click event for enemy selection
+// //      same enemy selection process
+
+// //    //end of game
+// //    -failure message- dead
+// //    -success message- winner!
+
+
+
+</script>
             
-            characterHealth = (characterObjects[eval("'"+chosenCharacter+"'")].healthPoints + characterObjects[eval("'"+chosenCharacter+"'")].damage);
-            $('#healthPointsRemaining').text(characterHealth);
-        }, 2000); 
-    //time interval for update back to ready state
-
-    var interval = setInterval(function(){
-        var timesRun = 0;
-        timesRun += 1;
-        if(timesRun === 1){
-            clearInterval(interval);
-           
-        }, 2000); 
-
-        var timesRun = 0;
-var interval = setInterval(function(){
-    timesRun += 1;
-    if(timesRun === 60){
-        clearInterval(interval);
-    }
-    //do whatever here..
-}, 2000); 
-   
-    
-    //at all increment points compare health to zero - break;
-    if(characterHealth <= 0){
-        alert("Your Pokemon fainted...");
-    }
-    else if(enemyHealth <= 0 && defeatedEnemies.length <3){
-        defeatedEnemies.push(currentEnemy);
-        alert("Round Two");
-    } else if(enemyHealth <= 0 && defeatedEnemies.length == 3){
-        alert("You are a PokeMon Master!");
-    } else {
-        attackingFlag = false;
-    }
-
-};
-
-   
-
-
-//    //end of fight
-//      -add enemy to defeated enemies
-//      -if last enemy check - if last enemy exit to game success message(end of game)
-//      -round success message
-//      -update points
-//      -evaluate character level
-//      -new powers message
-//      -update display to choices screen (with choose enemies open- defeated enemies)
-//      same on-click event for enemy selection
-//      same enemy selection process
-
-//    //end of game
-//    -failure message- dead
-//    -success message- winner!
-
-
-    </script>    
 </body>
+
 </html>

@@ -1,0 +1,27 @@
+#pikachuEnemy{
+    background-color:yellow; 
+    height:100px; 
+    margin: 20px auto
+
+}
+
+#squirtleEnemy{
+    background-color:blue; 
+    height:100px; 
+    margin: 20px auto
+}
+#bulbasaurEnemy{
+
+    background-color:green; 
+    height:100px; 
+    margin: 20px auto
+
+
+}
+
+#charmanderEnemy{
+    background-color:orange;
+     height:100px; 
+     margin: 20px auto
+
+}
