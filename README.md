@@ -15,3 +15,6 @@ I have a bug with one of my variables being shadowed (although could be a proble
 I need to do some $('locator').html .. .text .append to move some more info into the HeadsUpDisplay at the top of the page which should have representative images and more data on Battle Start (did you notice the tooltips I played around with on Pikachu and Squirtle?)
 
 I also wanted to get rid of the alerts I am currently using for end game state and replace with an onScreen message and freeze everything so that you have to do a reset, since some of the buttons are still live (though some I wrapped in a blocking if statement)
+
+
+https://jbloodbeardn.github.io/unit-4-game/
